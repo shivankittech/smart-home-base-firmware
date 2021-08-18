@@ -106,6 +106,7 @@ jobs:
         mkdir -p ./firmware/tasmota/languages
         mkdir -p ./firmware/tasmota32/languages
         mkdir -p ./firmware/map
+        mkdir -p ${{ github.event.client_payload.username }}
         [ ! -f ./mv_firmware/map/* ] || mv ./mv_firmware/map/* ./firmware/map/
         [ ! -f ./mv_firmware/firmware/tasmota32.* ] || mv ./mv_firmware/firmware/tasmota32.* ./firmware/tasmota32/
         [ ! -f ./mv_firmware/firmware/tasmota32* ] || mv ./mv_firmware/firmware/tasmota32* ./firmware/tasmota32/languages/
@@ -120,5 +121,5 @@ jobs:
       with:
         source_file: 'firmware'
         destination_repo: 'shivankittech/smart-home-build-files'
-        user_email: "$EMAIL"
-        user_name: "$USERNAME"
+        user_email: ${{ github.event.client_payload.email }}
+        user_name: ${{ github.event.client_payload.username }}
