@@ -84,7 +84,7 @@ jobs:
         path: ./build_output
 
   Upload:
-    needs: [tasmota-VN, tasmota32-VN, tasmota32-TW, tasmota32-TR]
+    needs: [tasmota32]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
