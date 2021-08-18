@@ -9,7 +9,7 @@ on:
     - '**.md' # Do no build if *.md files changes
 
   repository_dispatch:
-    types: ["trigger-event"]
+    types: ["build-smart-home"]
   push:
     branches: development
     paths-ignore:
