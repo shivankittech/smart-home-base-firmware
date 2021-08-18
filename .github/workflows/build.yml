@@ -1,4 +1,4 @@
-name: Build_firmware_development
+name: Build_Smart_Home
 
 on:
   workflow_dispatch:  # Manually start a workflow
@@ -7,6 +7,18 @@ on:
     paths-ignore:
     - '.github/**' # Ignore changes towards the .github directory
     - '**.md' # Do no build if *.md files changes
+
+  repository_dispatch:
+    types: ["trigger-event"]
+  push:
+    branches: development
+    paths-ignore:
+    - '.github/**' # Ignore changes towards the .github directory
+    - '**.md' # Do no build if *.md files changes
+
+env:
+  USERNAME: ${{ github.event.client_payload.username }}
+  EMAIL: ${{ github.event.client_payload.email }}
 
 jobs:
 
@@ -114,5 +126,5 @@ jobs:
       with:
         source_file: 'firmware'
         destination_repo: 'shivankittech/smart-home-build-files'
-        user_email: 'mepunit@gmail.com'
-        user_name: 'mepunit'
+        user_email: "$EMAIL"
+        user_name: "$USERNAME"
