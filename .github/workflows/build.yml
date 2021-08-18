@@ -84,7 +84,7 @@ jobs:
         path: ./build_output
 
   Upload:
-    needs: [tasmota32]
+    needs: [tasmota-lite]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -103,6 +103,7 @@ jobs:
         [ ! -f ./mv_firmware/map/* ] || mv ./mv_firmware/map/* ./firmware/map/
         [ ! -f ./mv_firmware/firmware/tasmota32.* ] || mv ./mv_firmware/firmware/tasmota32.* ./firmware/tasmota32/
         [ ! -f ./mv_firmware/firmware/tasmota32* ] || mv ./mv_firmware/firmware/tasmota32* ./firmware/tasmota32/languages/
+        [ ! -f ./mv_firmware/firmware/tasmota-lite.* ] || mv ./mv_firmware/firmware/tasmota-lite.* ./firmware/tasmota/
         [ ! -f ./mv_firmware/firmware/* ] || mv ./mv_firmware/firmware/* ./firmware/tasmota/languages/
     - name: Display files to transfer
       run: ls -R ./*
@@ -113,5 +114,5 @@ jobs:
       with:
         source_file: 'firmware'
         destination_repo: 'shivankittech/smart-home-build-files'
-        user_email: 'github-actions@github.com'
-        user_name: 'github-actions'
+        user_email: 'mepunit@gmail.com'
+        user_name: 'mepunit'
