@@ -1,14 +1,14 @@
 name: Build_Smart_Home
 
 on:
-  workflow_dispatch:  # Manually start a workflow
+  # workflow_dispatch:  # Manually start a workflow
   repository_dispatch:
     types: ["build-smart-home"]
-  push:
-    branches: development
-    paths-ignore:
-    - '.github/**' # Ignore changes towards the .github directory
-    - '**.md' # Do no build if *.md files changes
+  # push:
+  #   branches: development
+  #   paths-ignore:
+  #   - '.github/**' # Ignore changes towards the .github directory
+  #   - '**.md' # Do no build if *.md files changes
 
 env:
   USERNAME: ${{ github.event.client_payload.username }}
