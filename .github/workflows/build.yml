@@ -13,6 +13,7 @@ on:
 env:
   USERNAME: ${{ github.event.client_payload.username }}
   EMAIL: ${{ github.event.client_payload.email }}
+  firmware_config: ${{ github.event.client_payload.firmware_config }}
 
 jobs:
 
