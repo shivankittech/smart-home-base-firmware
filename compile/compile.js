@@ -1,5 +1,6 @@
 // const shell = require('shelljs');
-const fs = require('fs-extra');
+// const fs = require('fs-extra');
+const fs = require('fs');
 // const path = require('path');
 // const _ = require('lodash');
 // const debug = require('debug')('compile');
@@ -14,7 +15,7 @@ const {
 } = require('./config');
 
 const getTasmotaVersion = () => {
-  const fileExists = fs.pathExistsSync(tasmotaVersionFile);
+  const fileExists = fs.existsSync(tasmotaVersionFile);
   const versRegexp = /const uint32_t VERSION = (.*);/gm;
 
   if (fileExists) {
@@ -34,7 +35,7 @@ const getTasmotaVersion = () => {
 };
 
 const getImageName = (socket, name) => {
-  const fileExists = fs.pathExistsSync(tasmotaInoFile);
+  const fileExists = fs.existsSync(tasmotaInoFile);
   const imageNameRegexp = /char image_name\[(.*)\];/gm;
   const codeImageStr = `TasmoCompiler-${name}`;
   let retValue = '';
