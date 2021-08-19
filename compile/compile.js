@@ -4,14 +4,14 @@ const path = require('path');
 const _ = require('lodash');
 const debug = require('debug')('compile');
 
-const { switchToBranch } = require('../git/git');
+// const { switchToBranch } = require('../git/git');
 const {
   tasmotaRepo,
   userConfigOvewrite,
   tasmotaVersionFile,
   userPlatformioOverrideIni,
   tasmotaInoFile,
-} = require('../config/config');
+} = require('./config');
 
 const getTasmotaVersion = () => {
   const fileExists = fs.pathExistsSync(tasmotaVersionFile);
@@ -61,7 +61,7 @@ const getImageName = (socket, name) => {
     } // findImageName
   } // fileExists
 
-  socket.emit('message', messageToEmit);
+  // socket.emit('message', messageToEmit);
   return retValue;
 };
 
@@ -131,7 +131,7 @@ const getFeaturePlatformioEntries = (data) => {
 
 const prepareFiles = async (socket, data) => {
   const { network, features, version, customParams } = data;
-  await switchToBranch(data.version.tasmotaVersion);
+  // await switchToBranch(data.version.tasmotaVersion);
 
   // user_config_override.h file
   const userDefinesNetwork = createUserDefines(network);
@@ -151,7 +151,7 @@ const prepareFiles = async (socket, data) => {
 
   try {
     await fs.writeFile(userConfigOvewrite, outputOverwrites);
-    debug(`Successfully write ${userConfigOvewrite}`);
+    // debug(`Successfully write ${userConfigOvewrite}`);
   } catch (e) {
     throw new Error(`Cannot write to ${userConfigOvewrite}: ${e}`);
   }
@@ -205,6 +205,8 @@ const prepareFiles = async (socket, data) => {
 const compileCode = (socket, data) => {
   prepareFiles(socket, data)
     .then((prepared) => {
+
+      /*
       const cdRet = shell.cd(tasmotaRepo);
       let outputMessages = [];
       const MESSAGE_BUFFER_SIZE = 5;
@@ -243,11 +245,12 @@ const compileCode = (socket, data) => {
         }
         debug(stdoutData);
       });
+      */
     })
     .catch((e) => {
-      socket.emit('message', e.message);
-      socket.emit('finished', { ok: false });
-      debug(e);
+      // socket.emit('message', e.message);
+      // socket.emit('finished', { ok: false });
+      // debug(e);
     });
 };
 

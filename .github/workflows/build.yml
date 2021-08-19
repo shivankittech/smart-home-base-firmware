@@ -63,12 +63,14 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -U platformio
-    - name: Run PlatformIO
+    - name: Prepare Project Configuration
       run: |
         curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
         sudo apt-get install -y nodejs
         node test.js
-        platformio run -e tasmota-lite
+    - name: Run PlatformIO
+      run: |
+        platformio run
     - uses: actions/upload-artifact@v2
       with:
         name: firmware
